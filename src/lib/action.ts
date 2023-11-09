@@ -14,7 +14,9 @@ export async function sendMessage(prevState: any, formData: FormData) {
       model: 'gpt-3.5-turbo',
     });
 
-    return completion.choices[0];
+    const { role, content } = completion.choices[0].message;
+
+    return { role, message: content };
   } catch (err) {
     console.log(err);
     return { message: 'Failed to get a response from openai' };
