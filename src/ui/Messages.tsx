@@ -12,7 +12,7 @@ function Messages({ messages }: { messages: [] }) {
           >
             <div className='max-w-4xl m-auto'>
               <div className='flex items-top gap-6'>
-                <span className='bg-[#19c37d] rounded-md w-10 h-10 flex justify-center items-center'>
+                <span className='bg-[#19c37d] rounded-md w-10 h-10 flex-shrink-0 flex justify-center items-center'>
                   {role === 'user' ? <UserIcon /> : <DesktopIcon />}
                 </span>
                 <p>{message}</p>
