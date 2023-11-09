@@ -1,14 +1,14 @@
 'use client';
 
-import { useState, useEffect, useLayoutEffect, useCallback } from 'react';
+import { useState, useLayoutEffect, useCallback } from 'react';
 
 export function useLocalStorage(key: string) {
   const [state, setState] = useState([] as any);
 
   useLayoutEffect(() => {
     const value = localStorage.getItem(key);
-
     if (value) setState([...JSON.parse(value)]);
+    if (!value) setState([]);
   }, [key]);
 
   const setValue = useCallback(

@@ -1,14 +1,12 @@
 'use client';
 
 import { sendMessage } from '@/lib/action';
-import { useLocalStorage } from '@/lib/useLocalStorage';
 import { useEffect, useRef } from 'react';
 import { useFormState } from 'react-dom';
 
-function SearchBox() {
+function SearchBox({ setValue }: { setValue: any }) {
   const ref = useRef<HTMLFormElement>(null);
-  const [value, setValue] = useLocalStorage('messages');
-
+  const messageRef = useRef<HTMLInputElement>(null);
   const [state, dispatch] = useFormState(sendMessage, {});
 
   useEffect(() => {
@@ -18,16 +16,19 @@ function SearchBox() {
   return (
     <form
       ref={ref}
+      onSubmit={() =>
+        setValue({ role: 'user', message: messageRef.current?.value })
+      }
       action={async (formData: FormData) => {
-        // set message into local storage
-        setValue({ role: 'user', message: formData.get('message') });
         ref.current?.reset();
-        await dispatch(formData);
+        dispatch(formData);
       }}
     >
       <input
+        ref={messageRef}
         placeholder='Send a message'
         name='message'
+        required
         className='w-full resize-none rounded-xl px-3 py-4 shadow-lg bg-[#494c5ecf] outline-none'
       />
     </form>

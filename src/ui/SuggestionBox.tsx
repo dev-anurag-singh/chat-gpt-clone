@@ -1,3 +1,5 @@
+'use client';
+
 import SuggestionCard from './SuggestionCard';
 
 const data = [
@@ -21,7 +23,7 @@ const data = [
 
 function SuggestionBox() {
   return (
-    <div className='grid grid-cols-1 grid-rows-4 gap-2 md:grid-cols-2 md:grid-rows-2'>
+    <div className='grid p-3 grid-cols-1 grid-rows-4 gap-2 md:grid-cols-2 md:grid-rows-2'>
       {data.map(({ title, content }) => (
         <SuggestionCard key={title} title={title} content={content} />
       ))}
